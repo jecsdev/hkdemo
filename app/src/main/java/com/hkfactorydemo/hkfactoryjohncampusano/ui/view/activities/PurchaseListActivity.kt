@@ -1,4 +1,4 @@
-package com.hkfactorydemo.hkfactoryjohncampusano.view.activities
+package com.hkfactorydemo.hkfactoryjohncampusano.ui.view.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

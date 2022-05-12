@@ -1,4 +1,4 @@
-package com.hkfactorydemo.hkfactoryjohncampusano.view.viewHolder
+package com.hkfactorydemo.hkfactoryjohncampusano.ui.view.viewHolder
 
 import android.view.View
 import android.widget.TextView

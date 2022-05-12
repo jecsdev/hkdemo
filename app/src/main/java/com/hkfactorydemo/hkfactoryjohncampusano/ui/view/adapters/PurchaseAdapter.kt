@@ -1,13 +1,14 @@
-package com.hkfactorydemo.hkfactoryjohncampusano.view.adapters
+package com.hkfactorydemo.hkfactoryjohncampusano.ui.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hkfactorydemo.hkfactoryjohncampusano.R
 import com.hkfactorydemo.hkfactoryjohncampusano.data.model.Purchase
-import com.hkfactorydemo.hkfactoryjohncampusano.view.viewHolder.PurchaseViewHolder
+import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.viewHolder.PurchaseViewHolder
+import javax.inject.Inject
 
-class PurchaseAdapter (private val purchaseList: MutableList<Purchase>):
+class PurchaseAdapter @Inject constructor(private val purchaseList: MutableList<Purchase>):
     RecyclerView.Adapter<PurchaseViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): PurchaseViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.row, viewGroup, false)
