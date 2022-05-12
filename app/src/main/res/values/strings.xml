@@ -5,4 +5,7 @@
     <string name="count">Cantidad de productos</string>
     <string name="total_Mount">Monto total</string>
     <string name="product">Nombre del producto</string>
+    <string name="welcome_words">Bienvenid@ a Hk Demo. Esta app le permite generar ventas de productos con comprobantes fiscales. Elija una de las opciones a continuacion para continuar.</string>
+    <string name="start_sell">Iniciar venta</string>
+    <string name="see_sells">Ver historial de ventas</string>
 </resources>
