@@ -3,7 +3,6 @@ package com.hkfactorydemo.hkfactoryjohncampusano.di
 import android.content.Context
 import androidx.room.Room
 import com.hkfactorydemo.hkfactoryjohncampusano.data.database.PurchaseDatabase
-import com.hkfactorydemo.hkfactoryjohncampusano.data.model.Purchase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

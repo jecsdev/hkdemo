@@ -3,7 +3,7 @@ package com.hkfactorydemo.hkfactoryjohncampusano.data.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.hkfactorydemo.hkfactoryjohncampusano.data.model.Purchase
+import com.hkfactorydemo.hkfactoryjohncampusano.data.model.PurchaseModel
 
 @Entity(tableName = "purchase_table")
 data class PurchaseEntity(
@@ -14,13 +14,13 @@ data class PurchaseEntity(
     @ColumnInfo(name = "product_name") val productName: String,
     @ColumnInfo(name = "product_quantity") val productQuantity: Int,
     @ColumnInfo(name = "product_price") val productPrice: Int,
-    @ColumnInfo(name = "total_selled") val totalSelled: Int
+    @ColumnInfo(name = "total_selled") val totalSold: Int
 )
 
-fun Purchase.toDatabase() = PurchaseEntity(
+fun PurchaseModel.toDatabase() = PurchaseEntity(
     customerName = customerName, seller = seller,
     productName = productName,
     productQuantity = productQuantity,
     productPrice = productQuantity,
-    totalSelled = totalSelled
+    totalSold = totalSold
 )
