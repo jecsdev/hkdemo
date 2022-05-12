@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">HkFactoryJohnCampusano</string>
+    <string name="customer_name">Cliente</string>
+    <string name="seller">Emisor</string>
+    <string name="count">Cantidad de productos</string>
+    <string name="total_Mount">Monto total</string>
+</resources>
