@@ -6,4 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.activities.PurchaseListActivity">
 
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
