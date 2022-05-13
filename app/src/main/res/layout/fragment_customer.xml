@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/customerFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.view.fragments.CustomerFragment">
 
@@ -51,22 +52,26 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginTop="56dp"
+        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/etNCf"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etSeller" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/etNCf"
-        android:layout_width="192dp"
-        android:layout_height="51dp"
-        android:layout_margin="55dp"
-        android:layout_marginStart="100dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="152dp"
         android:hint="@string/et_ncf"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintLeft_toLeftOf="@id/spNcf"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/spNcf"
-        app:layout_constraintTop_toBottomOf="@id/etSeller"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/etSeller"
+        app:layout_constraintVertical_bias="0.35" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnBackCustomerPage"

@@ -17,4 +17,22 @@
     <string name="next">Siguiente</string>
     <string name="seller_name">Razón social del suplidor</string>
     <string name="et_ncf">NCF</string>
+    <string name="product_code">Codigo</string>
+    <string name="product_name">Nombre del producto</string>
+    <string name="productPrice">Precio</string>
+    <string name="bussiness_name">Nombre del negocio</string>
+    <string name="customer_name_field">Nombre del cliente:</string>
+    <string name="vat_id_field">RNC o Cedula:</string>
+    <string name="vat_id">RNC o Cedula</string>
+    <string name="vat_number">NCF</string>
+    <string name="minus_text">-</string>
+    <string name="count_edit_text">0</string>
+    <string name="plus">+</string>
+    <string name="nombre_del_item">Nombre del item</string>
+    <string name="cantidad_por_item">Cantidad por item</string>
+    <string name="item_code">Codigo del item</string>
+    <string name="subtotal_item">Subtotal item</string>
+    <string name="generate">Generar</string>
+    <string name="subtotal_field">Subtotal:</string>
+    <string name="subtotal">Subtotal</string>
 </resources>

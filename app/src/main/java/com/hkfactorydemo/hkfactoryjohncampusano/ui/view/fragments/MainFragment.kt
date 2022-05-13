@@ -23,18 +23,20 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+        container?.removeAllViews()
         binding = FragmentMainBinding.inflate(inflater, container, false)
         btnStartPurchase = binding.btnStartPurchase
         btnPurchaseList = binding.btnGetSells
         btnStartPurchase.setOnClickListener {
-            parentFragmentManager.commit {
-                setCustomAnimations(
-                    androidx.appcompat.R.anim.abc_slide_in_bottom,
-                    com.google.android.material.R.anim.abc_fade_out,
-                )
-                replace(R.id.container, customerFragment)
-                addToBackStack(null)
-            }
+                parentFragmentManager.commit {
+                    setCustomAnimations(
+                        androidx.appcompat.R.anim.abc_slide_in_bottom,
+                        com.google.android.material.R.anim.abc_fade_out,
+                    )
+
+                    replace(R.id.container, customerFragment)
+                    addToBackStack(null)
+                }
         }
 
         btnPurchaseList.setOnClickListener {
