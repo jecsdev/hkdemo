@@ -13,6 +13,7 @@ data class Purchase (
         var productCode: String,
         var productQuantity: Int,
         var subtotal: Int,
+        var totalItems: Int,
         var totalSold: Int)
 
 
@@ -22,6 +23,7 @@ fun PurchaseEntity.toDomain() = Purchase(
         ,productQuantity = productQuantity, totalSold = totalSold
 ,ncf = ncf
 , vatId = vatId, productCode = productCode, subtotal = subtotal
+, totalItems = totalItems
 )
 
 

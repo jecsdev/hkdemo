@@ -17,6 +17,7 @@ data class PurchaseEntity(
     @ColumnInfo(name = "product_name") val productName: String,
     @ColumnInfo(name = "product_quantity") val productQuantity: Int,
     @ColumnInfo(name = "product_price") val productPrice: Int,
+    @ColumnInfo(name = "total_items") val totalItems: Int,
     @ColumnInfo(name = "subtotal") val subtotal: Int,
     @ColumnInfo(name = "total_selled") val totalSold: Int
 )
@@ -31,4 +32,5 @@ fun PurchaseModel.toDatabase() = PurchaseEntity(
     productPrice = productQuantity,
     subtotal = subtotal,
     totalSold = totalSold
+, totalItems = totalItems
 )

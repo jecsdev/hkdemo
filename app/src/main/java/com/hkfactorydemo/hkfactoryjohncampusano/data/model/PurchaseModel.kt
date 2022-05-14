@@ -12,11 +12,13 @@ data class PurchaseModel(
     var vatId: String,
     var productQuantity: Int,
     var subtotal: Int,
-    var totalSold: Int
+    var totalSold: Int,
+    var totalItems: Int
 )
 
 fun PurchaseEntity.toDomain() = PurchaseModel(customerName = customerName,
     seller = seller, productName = productName, productPrice = productPrice
     ,productQuantity = productQuantity, totalSold = totalSold
 , ncf = ncf, vatId = vatId, subtotal = subtotal, productCode = productCode
+, totalItems = totalItems
 )

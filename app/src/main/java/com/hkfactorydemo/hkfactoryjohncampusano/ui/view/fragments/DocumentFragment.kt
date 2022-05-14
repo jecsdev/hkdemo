@@ -67,8 +67,11 @@ class DocumentFragment : Fragment(){
             }
         }
 
+        if(purchaseList.isNotEmpty()) {
+            purchaseViewModel.getDetails()
+        }
 
-        //initAdapter()
+        initAdapter()
 
         binding.minusBtn.setOnClickListener {
             purchaseViewModel.minusNumber()
@@ -96,8 +99,10 @@ class DocumentFragment : Fragment(){
     private fun initAdapter() {
         recyclerView = binding.recyclerDocument
         recyclerView.layoutManager = viewManager
-        purchaseViewModel.purchaseModel.observe(viewLifecycleOwner){
-
+        purchaseViewModel.getDetails()
+        purchaseViewModel.detailsModel.observe(viewLifecycleOwner){
+            recyclerView.adapter = DetailsAdapter(it)
+            recyclerView.adapter?.notifyDataSetChanged()
         }
     }
 
