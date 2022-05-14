@@ -14,9 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
-    private lateinit var btnStartPurchase: Button
-    private lateinit var btnPurchaseList: Button
-    private val customerFragment = CustomerFragment()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,9 +23,8 @@ class MainFragment : Fragment() {
         // Inflate the layout for this fragment
         container?.removeAllViews()
         binding = FragmentMainBinding.inflate(inflater, container, false)
-        btnStartPurchase = binding.btnStartPurchase
-        btnPurchaseList = binding.btnGetSells
-        btnStartPurchase.setOnClickListener {
+        binding.btnStartPurchase.setOnClickListener {
+            val customerFragment = CustomerFragment()
                 parentFragmentManager.commit {
                     setCustomAnimations(
                         androidx.appcompat.R.anim.abc_slide_in_bottom,
@@ -39,7 +36,7 @@ class MainFragment : Fragment() {
                 }
         }
 
-        btnPurchaseList.setOnClickListener {
+        binding.btnGetSells.setOnClickListener {
             //TODO
         }
 

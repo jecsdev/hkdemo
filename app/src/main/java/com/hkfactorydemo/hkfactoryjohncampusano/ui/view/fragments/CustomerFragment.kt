@@ -15,13 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CustomerFragment : Fragment() {
     private lateinit var binding: FragmentCustomerBinding
-    private lateinit var customerNameEditText: EditText
-    private lateinit var customerVatIdEditText: EditText
-    private lateinit var ncfIdEditText: EditText
-
-    private lateinit var backBtn: Button
-    private lateinit var nextBtn: Button
-    private lateinit var nfcSpinner: Spinner
     private val ncfPrefixes = listOf("B01", "B02", "B14", "B15")
     private lateinit var ncfSpinnerValue: String
 
@@ -30,19 +23,19 @@ class CustomerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+        container?.removeAllViews()
         binding = FragmentCustomerBinding.inflate(inflater, container, false)
         val mainFragment = MainFragment()
         val spinnerAdapter =
             ArrayAdapter(context!!, android.R.layout.simple_spinner_item, ncfPrefixes)
 
 
-        backBtn = binding.btnBackCustomerPage
-        nextBtn = binding.btnNextPurchasePage
+        binding.btnNextPurchasePage
 
-        nfcSpinner = binding.spNcf
-        nfcSpinner.adapter = spinnerAdapter
 
-        nfcSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.spNcf.adapter = spinnerAdapter
+
+        binding.spNcf.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -61,12 +54,12 @@ class CustomerFragment : Fragment() {
 
         }
 
-        nextBtn.setOnClickListener {
+        binding.btnNextPurchasePage.setOnClickListener {
             saveDocumentGeneralInformation()
         }
 
 
-        backBtn.setOnClickListener {
+        binding.btnBackCustomerPage.setOnClickListener {
             val builder = AlertDialog.Builder(it.context)
             builder.setTitle("Aviso")
             builder.setMessage(
@@ -78,9 +71,7 @@ class CustomerFragment : Fragment() {
                         androidx.appcompat.R.anim.abc_slide_in_bottom,
                         com.google.android.material.R.anim.abc_fade_out,
                     )
-
                     replace(R.id.container, mainFragment)
-                    addToBackStack(null)
                 }
             }
             builder.setNegativeButton("No", null).create()
@@ -92,13 +83,12 @@ class CustomerFragment : Fragment() {
     private fun saveDocumentGeneralInformation() {
         val documentFragment = DocumentFragment()
         val bundle = Bundle()
-        customerNameEditText = binding.etCustomerName
-        customerVatIdEditText = binding.etRncId
-        ncfIdEditText = binding.etNCf
 
-        bundle.putString("customerName", customerNameEditText.text.toString())
-        bundle.putString("customerVatId", customerVatIdEditText.text.toString())
-        bundle.putString("ncfNumber", ncfIdEditText.text.toString())
+        bundle.putString("customerName", binding.etCustomerName.text.toString())
+        bundle.putString("customerVatId", binding.etRncId.text.toString())
+        bundle.putString("sellerName", binding.etSeller.text.toString())
+        bundle.putString("ncfNumber", ncfSpinnerValue + binding.etNCf.text.toString())
+
 
         parentFragmentManager.commit {
             setCustomAnimations(
@@ -108,6 +98,7 @@ class CustomerFragment : Fragment() {
 
             replace(R.id.container, documentFragment)
             addToBackStack(null)
+            documentFragment.arguments = bundle
         }
     }
 
