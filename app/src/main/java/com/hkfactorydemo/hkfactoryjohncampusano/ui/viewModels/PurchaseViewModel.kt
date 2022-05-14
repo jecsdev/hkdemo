@@ -36,6 +36,12 @@ class PurchaseViewModel @Inject constructor(
         }
     }
 
+    fun addPurchase(purchase: Purchase){
+        viewModelScope.launch {
+            purchase.productName
+        }
+    }
+
     fun removePurchase(purchase: List<PurchaseEntity>){
         viewModelScope.launch {
             val result = getPurchaseCase()

@@ -7,9 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hkfactorydemo.hkfactoryjohncampusano.R
 import com.hkfactorydemo.hkfactoryjohncampusano.databinding.FragmentDocumentBinding
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
+import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.adapters.DetailsAdapter
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.viewModels.PurchaseViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,8 +20,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class DocumentFragment : Fragment(){
 
     private lateinit var binding: FragmentDocumentBinding
+    private  var viewManager = LinearLayoutManager(activity)
     private var subtotal = 0
-    private var total = 0
+    private val purchaseViewModel: PurchaseViewModel by viewModels()
+    private lateinit var recyclerView: RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,11 +33,11 @@ class DocumentFragment : Fragment(){
 
         binding = FragmentDocumentBinding.inflate(inflater, container, false)
 
-        val purchaseViewModel: PurchaseViewModel by viewModels()
+
 
         binding.countEt.text = purchaseViewModel.count.toString()
 
-
+        val purchaseList = mutableListOf<Purchase>()
 
         binding.sellerName.text = arguments?.getString("sellerName")
         binding.ncf.text = arguments?.getString("ncfNumber")
@@ -42,29 +47,28 @@ class DocumentFragment : Fragment(){
             subtotal =  binding.productPrice.text.toString().toInt() * purchaseViewModel.count
 
             binding.subtotal.text = subtotal.toString()
+
+
+        }
         purchaseViewModel.purchaseModel.observe(viewLifecycleOwner){purchase->
+            purchase.seller = binding.sellerName.text.toString()
+            purchase.ncf = binding.ncf.text.toString()
+            purchase.customerName = binding.customerNameField.text.toString()
+            purchase.vatId = binding.customerVatIdField.text.toString()
+            purchase.productCode = binding.codePurchaseEt.text.toString()
+            purchase.productName = binding.productNameEt.text.toString()
+            purchase.productPrice = binding.productPrice.toString().toInt()
+            purchase.productQuantity = purchaseViewModel.count
+            purchase.subtotal = subtotal
 
-
-
-
-                purchase.seller = binding.sellerName.text.toString()
-                purchase.ncf = binding.ncf.text.toString()
-                purchase.customerName = binding.customerNameField.text.toString()
-                purchase.vatId = binding.customerVatIdField.text.toString()
-                purchase.productCode = binding.codePurchaseEt.text.toString()
-                purchase.productName = binding.productNameEt.text.toString()
-                purchase.productPrice = binding.productPrice.toString().toInt()
-                purchase.productQuantity = purchaseViewModel.count
-                purchase.subtotal = subtotal
-
+            purchaseList.add(purchase)
+            purchaseList.forEach {
+                purchase.totalSold += it.subtotal
             }
-
-            //purchaseViewModel.createPurchase(purchase)
-
         }
 
 
-
+        //initAdapter()
 
         binding.minusBtn.setOnClickListener {
             purchaseViewModel.minusNumber()
@@ -89,6 +93,13 @@ class DocumentFragment : Fragment(){
         return binding.root
     }
 
+    private fun initAdapter() {
+        recyclerView = binding.recyclerDocument
+        recyclerView.layoutManager = viewManager
+        purchaseViewModel.purchaseModel.observe(viewLifecycleOwner){
+
+        }
+    }
 
 
 }

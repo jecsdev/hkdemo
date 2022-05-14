@@ -15,13 +15,7 @@ data class Purchase (
         var subtotal: Int,
         var totalSold: Int)
 
-fun PurchaseModel.toDomain() = Purchase(
-        customerName = customerName,
-        seller = seller, productName = productName, productPrice = productPrice
-        ,productQuantity = productQuantity, totalSold = totalSold
-, ncf = ncf
-, vatId = vatId, productCode = productCode, subtotal = subtotal
-)
+
 fun PurchaseEntity.toDomain() = Purchase(
         customerName = customerName,
         seller = seller, productName = productName, productPrice = productPrice
