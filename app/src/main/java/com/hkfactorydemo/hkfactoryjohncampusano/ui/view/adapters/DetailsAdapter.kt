@@ -17,8 +17,8 @@ RecyclerView.Adapter<DetailsViewHolder>(){
     }
 
     override fun onBindViewHolder(purchaseHolder: DetailsViewHolder, position: Int) {
-        var subtotalText = ""
-        var subtotal = 0
+        val subtotalText: String
+        val subtotal: Int
         val purchase = purchaseList[position]
         val productName = purchase.productName
         val productCount = purchase.productQuantity

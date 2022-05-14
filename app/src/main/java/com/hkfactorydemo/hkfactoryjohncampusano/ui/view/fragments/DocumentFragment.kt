@@ -38,31 +38,31 @@ class DocumentFragment : Fragment(){
         binding.ncf.text = arguments?.getString("ncfNumber")
         binding.customerName.text = arguments?.getString("customerName")
         binding.vatId.text = arguments?.getString("customerVatId")
-        purchaseViewModel.purchaseModel.observe(viewLifecycleOwner){_->
+        binding.addToCart.setOnClickListener {
+            subtotal =  binding.productPrice.text.toString().toInt() * purchaseViewModel.count
+
+            binding.subtotal.text = subtotal.toString()
+        purchaseViewModel.purchaseModel.observe(viewLifecycleOwner){purchase->
 
 
+
+
+                purchase.seller = binding.sellerName.text.toString()
+                purchase.ncf = binding.ncf.text.toString()
+                purchase.customerName = binding.customerNameField.text.toString()
+                purchase.vatId = binding.customerVatIdField.text.toString()
+                purchase.productCode = binding.codePurchaseEt.text.toString()
+                purchase.productName = binding.productNameEt.text.toString()
+                purchase.productPrice = binding.productPrice.toString().toInt()
+                purchase.productQuantity = purchaseViewModel.count
+                purchase.subtotal = subtotal
+
+            }
 
             //purchaseViewModel.createPurchase(purchase)
 
         }
-        binding.addToCart.setOnClickListener {
 
-
-            subtotal =  binding.productPrice.text.toString().toInt() * purchaseViewModel.count
-
-            binding.subtotal.text = subtotal.toString()
-
-           /* purchase.seller = binding.sellerName.text.toString()
-            purchase.ncf = binding.ncf.text.toString()
-            purchase.customerName = binding.customerNameField.text.toString()
-            purchase.vatId = binding.customerVatIdField.text.toString()
-            purchase.productCode = binding.codePurchaseEt.text.toString()
-            purchase.productName = binding.productNameEt.text.toString()
-            purchase.productPrice = binding.productPrice.toString().toInt()
-            purchase.productQuantity = purchaseViewModel.count
-            purchase.subtotal = subtotal*/
-
-        }
 
 
 
