@@ -20,7 +20,7 @@
     <string name="product_code">Codigo</string>
     <string name="product_name">Nombre del producto</string>
     <string name="productPrice">Precio</string>
-    <string name="business_name">Nombre del negocio</string>
+    <string name="business_name">Razón social</string>
     <string name="customer_name_field">Nombre del cliente:</string>
     <string name="vat_id_field">RNC o Cedula:</string>
     <string name="vat_id">RNC o Cedula</string>

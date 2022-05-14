@@ -18,6 +18,7 @@ class CustomerFragment : Fragment() {
     private lateinit var customerNameEditText: EditText
     private lateinit var customerVatIdEditText: EditText
     private lateinit var ncfIdEditText: EditText
+
     private lateinit var backBtn: Button
     private lateinit var nextBtn: Button
     private lateinit var nfcSpinner: Spinner
