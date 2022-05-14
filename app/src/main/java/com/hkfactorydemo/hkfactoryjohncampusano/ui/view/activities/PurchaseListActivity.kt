@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hkfactorydemo.hkfactoryjohncampusano.databinding.ActivityPurchaseListBinding
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.adapters.PurchaseAdapter
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.viewModels.PurchaseViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PurchaseListActivity : AppCompatActivity() {
 
     private var viewManager = LinearLayoutManager(this)
@@ -35,9 +37,8 @@ class PurchaseListActivity : AppCompatActivity() {
         observeData()
     }
 
-    private fun observeData() {
-        viewModel.purchaseModel
-        viewModel.purchaseModel.observe(
+    private fun observeData(){
+        viewModel.purchaseModelList.observe(
             this
         ) {
             mainRecyclerView.adapter = PurchaseAdapter(viewModel, it, this)

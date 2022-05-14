@@ -18,7 +18,7 @@ class PurchaseRepository @Inject constructor(
         purchaseDao.insertPurchase(purchase)
     }
 
-    suspend fun deletePurchase(purchase: List<PurchaseEntity>){
-        purchaseDao.deleteAllPurchases(purchase)
+    suspend fun deletePurchase(){
+        purchaseDao.deleteAllPurchases()
     }
 }

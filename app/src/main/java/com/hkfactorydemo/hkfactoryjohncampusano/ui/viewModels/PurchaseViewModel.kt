@@ -11,11 +11,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PurchaseViewModel @Inject constructor( private val getPurchaseCase: GetPurchaseCase):
+class PurchaseViewModel @Inject constructor(
+    val getPurchaseCase: GetPurchaseCase):
     ViewModel() {
 
-     val purchaseModel = MutableLiveData<MutableList<Purchase>>()
-
+    val purchaseModelList = MutableLiveData<MutableList<Purchase>>()
+    val purchaseModel = MutableLiveData<Purchase>()
+    var number = 0
     fun getPurchase(){
         viewModelScope.launch {
            val result = getPurchaseCase()
@@ -38,8 +40,19 @@ class PurchaseViewModel @Inject constructor( private val getPurchaseCase: GetPur
         viewModelScope.launch {
             val result = getPurchaseCase()
             if(result.isNotEmpty()){
-                getPurchaseCase.deleteAllPurchases(purchase)
+                getPurchaseCase.deleteAllPurchases()
             }
+        }
+    }
+
+    fun addNumber(){
+        number++
+    }
+
+    fun minusNumber(){
+        number--
+        if(number <0){
+            number = 0
         }
     }
 }

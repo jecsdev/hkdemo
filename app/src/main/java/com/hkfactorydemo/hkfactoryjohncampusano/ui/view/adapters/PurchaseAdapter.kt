@@ -3,6 +3,7 @@ package com.hkfactorydemo.hkfactoryjohncampusano.ui.view.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.hkfactorydemo.hkfactoryjohncampusano.R
 import com.hkfactorydemo.hkfactoryjohncampusano.data.model.PurchaseModel

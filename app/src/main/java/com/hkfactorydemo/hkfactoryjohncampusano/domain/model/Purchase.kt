@@ -8,18 +8,26 @@ data class Purchase (
         var seller: String,
         var productName: String,
         var productPrice: Int?,
+        var ncf: String?,
+        var vatId: String,
+        var productCode: String,
         var productQuantity: Int,
+        var subtotal: Int,
         var totalSold: Int)
 
 fun PurchaseModel.toDomain() = Purchase(
         customerName = customerName,
         seller = seller, productName = productName, productPrice = productPrice
         ,productQuantity = productQuantity, totalSold = totalSold
+, ncf = ncf
+, vatId = vatId, productCode = productCode, subtotal = subtotal
 )
 fun PurchaseEntity.toDomain() = Purchase(
         customerName = customerName,
         seller = seller, productName = productName, productPrice = productPrice
         ,productQuantity = productQuantity, totalSold = totalSold
+,ncf = ncf
+, vatId = vatId, productCode = productCode, subtotal = subtotal
 )
 
 

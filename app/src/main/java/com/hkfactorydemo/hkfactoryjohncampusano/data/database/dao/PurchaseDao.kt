@@ -14,6 +14,6 @@ interface PurchaseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPurchase(purchase: PurchaseEntity)
 
-    @Query("DELETE FROM purchase_table")
-    suspend fun deleteAllPurchases(purchase: List<PurchaseEntity>)
+   @Query("DELETE FROM purchase_table")
+    suspend fun deleteAllPurchases()
 }

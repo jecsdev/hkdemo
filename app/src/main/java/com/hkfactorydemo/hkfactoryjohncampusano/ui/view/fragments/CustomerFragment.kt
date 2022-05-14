@@ -101,5 +101,4 @@ class CustomerFragment : Fragment() {
             documentFragment.arguments = bundle
         }
     }
-
 }
