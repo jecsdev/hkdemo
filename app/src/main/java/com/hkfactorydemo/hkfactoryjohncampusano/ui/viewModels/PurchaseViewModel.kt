@@ -17,7 +17,7 @@ class PurchaseViewModel @Inject constructor(
 
     val purchaseModelList = MutableLiveData<MutableList<Purchase>>()
     val purchaseModel = MutableLiveData<Purchase>()
-    var number = 0
+    var count = 0
     fun getPurchase(){
         viewModelScope.launch {
            val result = getPurchaseCase()
@@ -46,13 +46,13 @@ class PurchaseViewModel @Inject constructor(
     }
 
     fun addNumber(){
-        number++
+        count++
     }
 
     fun minusNumber(){
-        number--
-        if(number <0){
-            number = 0
+        count--
+        if(count <0){
+            count = 0
         }
     }
 }

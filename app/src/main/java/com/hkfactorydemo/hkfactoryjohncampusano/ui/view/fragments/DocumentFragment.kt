@@ -5,14 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.hkfactorydemo.hkfactoryjohncampusano.R
 import com.hkfactorydemo.hkfactoryjohncampusano.databinding.FragmentDocumentBinding
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
@@ -36,48 +30,57 @@ class DocumentFragment : Fragment(){
 
         val purchaseViewModel: PurchaseViewModel by viewModels()
 
-        binding.countEt.text = purchaseViewModel.number.toString()
+        binding.countEt.text = purchaseViewModel.count.toString()
 
 
 
-        val sellerName = arguments?.getString("sellerName")
-        val ncfNumber = arguments?.getString("ncfNumber")
-        val customerName = arguments?.getString("customerName")
-        val customerVatId = arguments?.getString("customerVatId")
+        binding.sellerName.text = arguments?.getString("sellerName")
+        binding.ncf.text = arguments?.getString("ncfNumber")
+        binding.customerName.text = arguments?.getString("customerName")
+        binding.vatId.text = arguments?.getString("customerVatId")
 
-        purchaseViewModel.purchaseModel.observe(viewLifecycleOwner
+        purchaseViewModel.purchaseModel.observe(viewLifecycleOwner){purchase->
 
-        ) {
+            binding.addToCart.setOnClickListener {
+                if(binding.codeItem.text.isNotEmpty()){
+                    binding.codeItem.visibility = View.VISIBLE
+                    binding.codeItem.text = binding.codePurchaseEt.text
+                }
+                if(binding.itemName.text.isNotEmpty()){
+                    binding.itemName.visibility = View.VISIBLE
+                    binding.itemName.text = binding.productNameEt.text
+                }
+                if(binding.itemCount.text.isNotEmpty()){
+                    binding.itemCount.visibility = View.VISIBLE
+                    binding.itemCount.text = purchaseViewModel.count.toString()
+                }
 
-            if(binding.codeItem.text.isNotEmpty()){
-                   binding.codeItem.visibility = View.VISIBLE
+                subtotal = purchaseViewModel.count * binding.productPrice.text.toString().toInt()
+                binding.subtotalItem.text = subtotal.toString()
+
+                purchase.seller = binding.sellerName.text.toString()
+                purchase.ncf = binding.ncf.text.toString()
+                purchase.customerName = binding.customerNameField.text.toString()
+                purchase.vatId = binding.customerVatIdField.text.toString()
+                purchase.productCode = binding.codePurchaseEt.text.toString()
+                purchase.productName = binding.productNameEt.text.toString()
+                purchase.productPrice = binding.productPrice.toString().toInt()
+                purchase.productQuantity = purchaseViewModel.count
+                purchase.subtotal = subtotal
+                //purchaseViewModel.createPurchase(purchase)
+
             }
-            if(binding.itemName.text.isNotEmpty()){
-                binding.itemName.visibility = View.VISIBLE
-            }
-            if(binding.itemCount.text.isNotEmpty()){
-                 binding.itemName.visibility = View.VISIBLE
-            }
 
-           binding.sellerName.text = it.seller
-            binding.ncf.text = it.ncf
-            binding.customerName.text = it.customerName
-            binding.vatId.text = it.vatId
-            binding.codeItem.text = it.productCode
-            binding.itemName.text = it.productName
-            binding.itemCount.text = it.productQuantity.toString()
-            binding.subtotalItem.text = it.subtotal.toString()
-            binding.subtotal.text = it.totalSold.toString()
         }
 
         binding.minusBtn.setOnClickListener {
             purchaseViewModel.minusNumber()
-            binding.countEt.text = purchaseViewModel.number.toString()
+            binding.countEt.text = purchaseViewModel.count.toString()
         }
 
         binding.plusBtn.setOnClickListener {
              purchaseViewModel.addNumber()
-            binding.countEt.text = purchaseViewModel.number.toString()
+            binding.countEt.text = purchaseViewModel.count.toString()
         }
 
         binding.btnBackDispatch.setOnClickListener{
@@ -92,19 +95,6 @@ class DocumentFragment : Fragment(){
         }
         return binding.root
     }
-
-    private fun addProduct(purchase: Purchase){
-
-        purchase.seller = binding.sellerName.text.toString()
-        purchase.ncf = binding.ncf.text.toString()
-        purchase.productName = binding.productNameEt.toString()
-        purchase.customerName = binding.customerName.text.toString()
-
-
-
-        
-    }
-
 
 
 

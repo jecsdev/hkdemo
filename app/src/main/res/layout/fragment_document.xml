@@ -89,7 +89,7 @@
         android:layout_height="48dp"
         android:autofillHints="Product code"
         android:hint="@string/product_code"
-        android:inputType="text"
+        android:inputType="number"
         android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.103"
@@ -119,7 +119,7 @@
         android:layout_height="48dp"
         android:autofillHints="Product price"
         android:hint="@string/productPrice"
-        android:inputType="text"
+        android:inputType="number"
         android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
@@ -254,6 +254,18 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subtotalItem"
         app:layout_constraintVertical_bias="0.223" />
+
+    <Button
+        android:id="@+id/addToCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemCount"
+        app:layout_constraintVertical_bias="0.312" />
 
     <Button
         android:id="@+id/btnBackDispatch"
