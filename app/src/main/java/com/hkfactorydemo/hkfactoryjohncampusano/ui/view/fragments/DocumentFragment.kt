@@ -38,40 +38,33 @@ class DocumentFragment : Fragment(){
         binding.ncf.text = arguments?.getString("ncfNumber")
         binding.customerName.text = arguments?.getString("customerName")
         binding.vatId.text = arguments?.getString("customerVatId")
+        purchaseViewModel.purchaseModel.observe(viewLifecycleOwner){_->
 
-        purchaseViewModel.purchaseModel.observe(viewLifecycleOwner){purchase->
 
-            binding.addToCart.setOnClickListener {
-                if(binding.codeItem.text.isNotEmpty()){
-                    binding.codeItem.visibility = View.VISIBLE
-                    binding.codeItem.text = binding.codePurchaseEt.text
-                }
-                if(binding.itemName.text.isNotEmpty()){
-                    binding.itemName.visibility = View.VISIBLE
-                    binding.itemName.text = binding.productNameEt.text
-                }
-                if(binding.itemCount.text.isNotEmpty()){
-                    binding.itemCount.visibility = View.VISIBLE
-                    binding.itemCount.text = purchaseViewModel.count.toString()
-                }
 
-                subtotal = purchaseViewModel.count * binding.productPrice.text.toString().toInt()
-                binding.subtotalItem.text = subtotal.toString()
-
-                purchase.seller = binding.sellerName.text.toString()
-                purchase.ncf = binding.ncf.text.toString()
-                purchase.customerName = binding.customerNameField.text.toString()
-                purchase.vatId = binding.customerVatIdField.text.toString()
-                purchase.productCode = binding.codePurchaseEt.text.toString()
-                purchase.productName = binding.productNameEt.text.toString()
-                purchase.productPrice = binding.productPrice.toString().toInt()
-                purchase.productQuantity = purchaseViewModel.count
-                purchase.subtotal = subtotal
-                //purchaseViewModel.createPurchase(purchase)
-
-            }
+            //purchaseViewModel.createPurchase(purchase)
 
         }
+        binding.addToCart.setOnClickListener {
+
+
+            subtotal =  binding.productPrice.text.toString().toInt() * purchaseViewModel.count
+
+            binding.subtotal.text = subtotal.toString()
+
+           /* purchase.seller = binding.sellerName.text.toString()
+            purchase.ncf = binding.ncf.text.toString()
+            purchase.customerName = binding.customerNameField.text.toString()
+            purchase.vatId = binding.customerVatIdField.text.toString()
+            purchase.productCode = binding.codePurchaseEt.text.toString()
+            purchase.productName = binding.productNameEt.text.toString()
+            purchase.productPrice = binding.productPrice.toString().toInt()
+            purchase.productQuantity = purchaseViewModel.count
+            purchase.subtotal = subtotal*/
+
+        }
+
+
 
         binding.minusBtn.setOnClickListener {
             purchaseViewModel.minusNumber()
