@@ -86,24 +86,26 @@
     <EditText
         android:id="@+id/codePurchaseEt"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:autofillHints="Product code"
         android:hint="@string/product_code"
         android:inputType="text"
+        android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.103"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/productNameEt"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.309"
-        android:autofillHints="Product code" />
+        app:layout_constraintVertical_bias="0.309" />
 
     <EditText
         android:id="@+id/productNameEt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/product_name"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
         android:autofillHints="Product name"
+        android:hint="@string/product_name"
         android:inputType="text"
+        android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.931"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -114,21 +116,22 @@
     <EditText
         android:id="@+id/productPrice"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:autofillHints="Product price"
         android:hint="@string/productPrice"
         android:inputType="text"
+        android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productNameEt"
-        app:layout_constraintVertical_bias="0.097"
-        android:autofillHints="Product price" />
+        app:layout_constraintVertical_bias="0.097" />
 
     <Button
         android:id="@+id/minus_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:text="@string/minus_text"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -136,7 +139,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productNameEt"
-        app:layout_constraintVertical_bias="0.097" />
+        app:layout_constraintVertical_bias="0.09" />
 
     <TextView
         android:id="@+id/count_et"
@@ -156,8 +159,8 @@
 
     <Button
         android:id="@+id/plus_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:text="@string/plus"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
