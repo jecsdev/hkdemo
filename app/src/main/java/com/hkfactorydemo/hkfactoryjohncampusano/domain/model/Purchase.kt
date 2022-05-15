@@ -26,4 +26,12 @@ fun PurchaseEntity.toDomain() = Purchase(
 , totalItems = totalItems
 )
 
+fun Details.toDomain() = Details(
+        productCode = productCode,
+        productQuantity = productQuantity,
+        productPrice = productPrice,
+        productName =  productName,
+        subtotal = subtotal
+)
+
 

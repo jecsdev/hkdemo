@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hkfactorydemo.hkfactoryjohncampusano.R
+import com.hkfactorydemo.hkfactoryjohncampusano.data.database.entities.PurchaseEntity
 import com.hkfactorydemo.hkfactoryjohncampusano.databinding.FragmentDocumentBinding
+import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Details
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.adapters.DetailsAdapter
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.viewModels.PurchaseViewModel
@@ -22,6 +24,7 @@ class DocumentFragment : Fragment(){
     private lateinit var binding: FragmentDocumentBinding
     private  var viewManager = LinearLayoutManager(activity)
     private var subtotal = 0
+    private var detailsList = mutableListOf<Details>()
     private val purchaseViewModel: PurchaseViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
     override fun onCreateView(
@@ -43,42 +46,36 @@ class DocumentFragment : Fragment(){
         binding.ncf.text = arguments?.getString("ncfNumber")
         binding.customerName.text = arguments?.getString("customerName")
         binding.vatId.text = arguments?.getString("customerVatId")
-        binding.addToCart.setOnClickListener {
-            subtotal =  binding.productPrice.text.toString().toInt() * purchaseViewModel.count
 
+
+
+        binding.generateBtn.setOnClickListener {
+            val purchase = PurchaseEntity(seller = binding.sellerName.text.toString(),
+                ncf = binding.ncf.text.toString(), customerName = binding.customerName.text.toString()
+                , vatId = binding.customerVatIdField.text.toString(),
+                productCode = binding.codePurchaseEt.text.toString(), productQuantity = purchaseViewModel.count,
+                productName = binding.productNameEt.text.toString(),
+                productPrice = binding.productPrice.text.toString().toInt(),
+                subtotal = binding.subtotal.text.toString().toInt(), totalItems = 0, totalSold = 0)
+        }
+
+
+        binding.addToCart.setOnClickListener {
+
+
+            subtotal =  binding.productPrice.text.toString().toInt() * purchaseViewModel.count
             binding.subtotal.text = subtotal.toString()
 
+            val details = Details(productPrice = binding.productPrice.text.toString().toInt(),
+                productName = binding.productNameEt.text.toString(), productQuantity = purchaseViewModel.count,
+                productCode = binding.codePurchaseEt.text.toString(), subtotal = binding.subtotal.text.toString().toInt())
 
-        }
-        purchaseViewModel.purchaseModel.observe(viewLifecycleOwner){purchase->
-            purchase.seller = binding.sellerName.text.toString()
-            purchase.ncf = binding.ncf.text.toString()
-            purchase.customerName = binding.customerNameField.text.toString()
-            purchase.vatId = binding.customerVatIdField.text.toString()
-            purchase.productCode = binding.codePurchaseEt.text.toString()
-            purchase.productName = binding.productNameEt.text.toString()
-            purchase.productPrice = binding.productPrice.toString().toInt()
-            purchase.productQuantity = purchaseViewModel.count
-            purchase.subtotal = subtotal
+            detailsList.add(details)
 
-            purchaseList.add(purchase)
-            purchaseList.forEach {
-                purchase.totalSold += it.subtotal
-            }
-
-            purchaseViewModel.detailModels.observe(viewLifecycleOwner){
-                it.subtotal = purchase.subtotal
-                it.productPrice = purchase.productPrice
-                it.productName = purchase.productName
-                it.productCode = purchase.productCode
-                it.productQuantity = purchase.productQuantity
-            }
-
+            initAdapter(detailsList)
         }
 
 
-
-        initAdapter()
 
         binding.minusBtn.setOnClickListener {
             purchaseViewModel.minusNumber()
@@ -103,13 +100,12 @@ class DocumentFragment : Fragment(){
         return binding.root
     }
 
-    private fun initAdapter() {
+    private fun initAdapter(details: List<Details>) {
         recyclerView = binding.recyclerDocument
         recyclerView.layoutManager = viewManager
-        purchaseViewModel.detailsModelList.observe(viewLifecycleOwner){
-            recyclerView.adapter = DetailsAdapter(it)
-            recyclerView.adapter?.notifyDataSetChanged()
-        }
+        recyclerView.adapter = DetailsAdapter(details)
+        recyclerView.adapter?.notifyDataSetChanged()
+
     }
 
 

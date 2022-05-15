@@ -30,13 +30,9 @@ class PurchaseViewModel @Inject constructor(
         }
     }
 
-    fun insertDetails(purchase: Purchase){
+    fun insertDetails(details: Details){
         viewModelScope.launch {
-            detailModels.value?.productName = purchase.productName
-            detailModels.value?.productCode = purchase.productCode
-            detailModels.value?.productPrice = purchase.productPrice
-            detailModels.value?.productQuantity = purchase.productQuantity
-            detailModels.value?.subtotal = purchase.subtotal
+            detailModels.postValue(details)
         }
     }
 

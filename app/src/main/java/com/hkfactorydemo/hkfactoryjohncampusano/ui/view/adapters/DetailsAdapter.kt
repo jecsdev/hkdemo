@@ -10,7 +10,7 @@ import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.viewHolder.DetailsViewHolder
 import javax.inject.Inject
 
-class DetailsAdapter @Inject constructor(private val purchaseList: MutableList<Details>) :
+class DetailsAdapter @Inject constructor(private val purchaseList: List<Details>) :
 RecyclerView.Adapter<DetailsViewHolder>(){
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): DetailsViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.details_row, viewGroup, false)

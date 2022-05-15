@@ -2,6 +2,7 @@ package com.hkfactorydemo.hkfactoryjohncampusano.data
 
 import com.hkfactorydemo.hkfactoryjohncampusano.data.database.dao.PurchaseDao
 import com.hkfactorydemo.hkfactoryjohncampusano.data.database.entities.PurchaseEntity
+import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Details
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.toDomain
 import javax.inject.Inject
@@ -21,4 +22,6 @@ class PurchaseRepository @Inject constructor(
     suspend fun deletePurchase(){
         purchaseDao.deleteAllPurchases()
     }
+
+
 }
