@@ -39,7 +39,7 @@ class PurchaseListActivity : AppCompatActivity() {
 
     private fun observeData(){
         viewModel.purchaseModelList.observe(this) {
-            mainRecyclerView.adapter = PurchaseAdapter(viewModel.purchaseModelList.value!!)
+            mainRecyclerView.adapter = PurchaseAdapter( it, viewModel)
             mainRecyclerView.adapter?.notifyDataSetChanged()
         }
     }

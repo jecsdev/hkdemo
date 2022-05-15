@@ -13,10 +13,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PurchaseViewModel @Inject constructor(
-    val getPurchaseCase: GetPurchaseCase):
+    private val getPurchaseCase: GetPurchaseCase):
     ViewModel() {
 
-    var purchaseModelList = MutableLiveData<List<Purchase>>()
+    var purchaseModelList = MutableLiveData<MutableList<Purchase>>()
     private val purchaseModel = MutableLiveData<Purchase>()
     val detailsModelList = MutableLiveData<MutableList<Details>>()
     var total = 0
@@ -25,7 +25,7 @@ class PurchaseViewModel @Inject constructor(
     fun getPurchase(){
         viewModelScope.launch {
             val list = getPurchaseCase.invoke()
-            purchaseModelList.postValue(list)
+            purchaseModelList.postValue(list as MutableList<Purchase>?)
         }
     }
 
@@ -36,12 +36,10 @@ class PurchaseViewModel @Inject constructor(
         }
     }
 
-    fun removePurchase(purchase: List<PurchaseEntity>){
+    fun removePurchase(purchase: Int){
         viewModelScope.launch {
-            val result = getPurchaseCase()
-            if(result.isNotEmpty()){
-                getPurchaseCase.deleteAllPurchases()
-            }
+            getPurchaseCase.deleteAllPurchases(purchase)
+            getPurchase()
         }
     }
 

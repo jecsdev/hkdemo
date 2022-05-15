@@ -14,8 +14,8 @@ class GetPurchaseCase @Inject constructor(private val purchaseRepository: Purcha
         return purchaseRepository.insertPurchases(purchase)
     }
 
-    suspend fun deleteAllPurchases(){
-        return purchaseRepository.deletePurchase()
+    suspend fun deleteAllPurchases(purchaseId: Int){
+        return purchaseRepository.deletePurchase(purchaseId)
     }
 
 }

@@ -14,6 +14,6 @@ interface PurchaseDao {
     @Insert
     suspend fun insertPurchase(purchase: PurchaseEntity)
 
-   @Query("DELETE FROM purchase_table")
-    suspend fun deleteAllPurchases()
+   @Query("DELETE FROM purchase_table where :purchaseId = id")
+    suspend fun deleteAllPurchases(purchaseId: Int)
 }
