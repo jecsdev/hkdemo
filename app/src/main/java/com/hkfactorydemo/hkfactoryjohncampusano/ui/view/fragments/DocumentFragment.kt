@@ -37,10 +37,7 @@ class DocumentFragment : Fragment(){
         binding = FragmentDocumentBinding.inflate(inflater, container, false)
 
 
-
         binding.countEt.text = purchaseViewModel.count.toString()
-
-        val purchaseList = mutableListOf<Purchase>()
 
         binding.sellerName.text = arguments?.getString("sellerName")
         binding.ncf.text = arguments?.getString("ncfNumber")
@@ -48,23 +45,10 @@ class DocumentFragment : Fragment(){
         binding.vatId.text = arguments?.getString("customerVatId")
 
 
-
-        binding.generateBtn.setOnClickListener {
-            val purchase = PurchaseEntity(seller = binding.sellerName.text.toString(),
-                ncf = binding.ncf.text.toString(), customerName = binding.customerName.text.toString()
-                , vatId = binding.customerVatIdField.text.toString(),
-                productCode = binding.codePurchaseEt.text.toString(), productQuantity = purchaseViewModel.count,
-                productName = binding.productNameEt.text.toString(),
-                productPrice = binding.productPrice.text.toString().toInt(),
-                subtotal = binding.subtotal.text.toString().toInt(), totalItems = 0, totalSold = 0)
-        }
-
-
         binding.addToCart.setOnClickListener {
-
-
             subtotal =  binding.productPrice.text.toString().toInt() * purchaseViewModel.count
-            binding.subtotal.text = subtotal.toString()
+            purchaseViewModel.total+=subtotal
+            binding.subtotal.text = purchaseViewModel.total.toString()
 
             val details = Details(productPrice = binding.productPrice.text.toString().toInt(),
                 productName = binding.productNameEt.text.toString(), productQuantity = purchaseViewModel.count,
@@ -75,11 +59,21 @@ class DocumentFragment : Fragment(){
             purchaseViewModel.detailsModelList.value = detailsList
             initAdapter(purchaseViewModel.detailsModelList.value!!)
 
-
+            clearTextFields()
 
         }
 
-
+        binding.generateBtn.setOnClickListener {
+            val purchase = PurchaseEntity(seller = binding.sellerName.text.toString(),
+                ncf = binding.ncf.text.toString(), customerName = binding.customerName.text.toString()
+                , vatId = binding.customerVatIdField.text.toString(),
+                productCode = binding.codePurchaseEt.text.toString(), productQuantity = purchaseViewModel.count,
+                productName = binding.productNameEt.text.toString(),
+                productPrice = binding.productPrice.text.toString().toInt(),
+                subtotal = binding.subtotal.text.toString().toInt(),
+                totalItems = purchaseViewModel.detailsModelList.value!!.size,
+                totalSold = purchaseViewModel.total)
+        }
 
         binding.minusBtn.setOnClickListener {
             purchaseViewModel.minusNumber()
@@ -104,13 +98,17 @@ class DocumentFragment : Fragment(){
         return binding.root
     }
 
+    private fun clearTextFields() {
+        binding.productPrice.text.clear()
+        binding.productNameEt.text.clear()
+        binding.codePurchaseEt.text.clear()
+    }
+
     private fun initAdapter(details: MutableList<Details>) {
         recyclerView = binding.recyclerDocument
         recyclerView.layoutManager = viewManager
             recyclerView.adapter = DetailsAdapter(details)
             recyclerView.adapter?.notifyDataSetChanged()
-
-
 
     }
 

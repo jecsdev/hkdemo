@@ -55,7 +55,61 @@ class CustomerFragment : Fragment() {
         }
 
         binding.btnNextPurchasePage.setOnClickListener {
-            saveDocumentGeneralInformation()
+            if(binding.etCustomerName.text.isNullOrEmpty()){
+                binding.etCustomerName.error = "Por favor, introduzca un nombre."
+                binding.etCustomerName.hint = "Por favor, introduzca un nombre."
+                binding.etCustomerName.setTextColor(R.color.red)
+            }
+            if(binding.etNCf.text.isNullOrEmpty()){
+                binding.etNCf.error = "Por favor, introduzca un numero NCF."
+                binding.etNCf.hint = "Por favor, introduzca un numero NCF."
+                binding.etNCf.setTextColor(R.color.red)
+            }
+            if(binding.etRncId.text.isNullOrEmpty()){
+                binding.etRncId.error = "Por favor, introduzca un numero de RNC."
+                binding.etRncId.hint = "Por favor, introduzca un numero de RNC."
+                binding.etRncId.setTextColor(R.color.red)
+            }
+            if(binding.etSeller.text.isNullOrEmpty()){
+                binding.etSeller.error = "Por favor, introduzca el nombre del suplidor."
+                binding.etSeller.hint = "Por favor, introduzca el nombre del suplidor."
+                binding.etSeller.setTextColor(R.color.red)
+            }
+
+            if(binding.etSeller.text.isNullOrEmpty() && binding.etRncId.text.isNullOrEmpty() &&
+                binding.etCustomerName.text.isNullOrEmpty()){
+                binding.etCustomerName.error = "Por favor, introduzca un nombre."
+                binding.etCustomerName.hint = "Por favor, introduzca un nombre."
+                binding.etCustomerName.setTextColor(R.color.red)
+                binding.etSeller.error = "Por favor, introduzca el nombre del suplidor."
+                binding.etSeller.hint = "Por favor, introduzca el nombre del suplidor."
+                binding.etSeller.setTextColor(R.color.red)
+                binding.etRncId.error = "Por favor, introduzca un numero de RNC."
+                binding.etRncId.hint = "Por favor, introduzca un numero de RNC."
+                binding.etRncId.setTextColor(R.color.red)
+            }
+
+            if(binding.etSeller.text.isNullOrEmpty() && binding.etRncId.text.isNullOrEmpty() &&
+                binding.etRncId.text.isNullOrEmpty() && binding.etNCf.text.isNullOrEmpty()
+                && binding.etCustomerName.text.isNullOrEmpty()){
+                binding.etSeller.error = "Por favor, introduzca el nombre del suplidor."
+                binding.etSeller.hint = "Por favor, introduzca el nombre del suplidor."
+                binding.etSeller.setTextColor(R.color.red)
+                binding.etRncId.error = "Por favor, introduzca un numero de RNC."
+                binding.etRncId.hint = "Por favor, introduzca un numero de RNC."
+                binding.etRncId.setTextColor(R.color.red)
+                binding.etNCf.error = "Por favor, introduzca un numero NCF."
+                binding.etNCf.hint = "Por favor, introduzca un numero NCF."
+                binding.etNCf.setTextColor(R.color.red)
+                binding.etCustomerName.error = "Por favor, introduzca un nombre."
+                binding.etCustomerName.hint = "Por favor, introduzca un nombre."
+                binding.etCustomerName.setTextColor(R.color.red)
+            }else {
+
+                saveDocumentGeneralInformation()
+            }
+
+
         }
 
 
@@ -83,6 +137,7 @@ class CustomerFragment : Fragment() {
     private fun saveDocumentGeneralInformation() {
         val documentFragment = DocumentFragment()
         val bundle = Bundle()
+
 
         bundle.putString("customerName", binding.etCustomerName.text.toString())
         bundle.putString("customerVatId", binding.etRncId.text.toString())

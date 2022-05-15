@@ -58,19 +58,6 @@
         app:layout_constraintVertical_bias="0.07" />
 
     <TextView
-        android:id="@+id/customerVatIdField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/vat_id_field"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/codePurchaseEt"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/customerNameField"
-        app:layout_constraintVertical_bias="0.2" />
-
-    <TextView
         android:id="@+id/vatId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,21 +69,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/customerName"
         app:layout_constraintVertical_bias="0.2" />
-
-    <EditText
-        android:id="@+id/codePurchaseEt"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:autofillHints="Product code"
-        android:hint="@string/product_code"
-        android:inputType="number"
-        android:textColorHint="#757575"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.103"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/productNameEt"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.309" />
 
     <EditText
         android:id="@+id/productNameEt"
@@ -112,21 +84,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.309" />
-
-    <EditText
-        android:id="@+id/productPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:autofillHints="Product price"
-        android:hint="@string/productPrice"
-        android:inputType="number"
-        android:textColorHint="#757575"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productNameEt"
-        app:layout_constraintVertical_bias="0.097" />
 
     <Button
         android:id="@+id/minus_btn"
@@ -177,7 +134,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toBottomOf="@id/minus_btn"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="-26dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerDocument"
@@ -185,7 +142,8 @@
             android:layout_height="150dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.6" />
+            app:layout_constraintVertical_bias="0.688"
+            tools:layout_editor_absoluteX="0dp" />
 
         <Button
             android:id="@+id/addToCart"
@@ -207,10 +165,10 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/subtotal"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recyclerDocument"
-            app:layout_constraintVertical_bias="0.6" />
+            app:layout_constraintVertical_bias="0.605" />
 
         <TextView
             android:id="@+id/subtotal"
@@ -247,6 +205,48 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/subtotalField"
             app:layout_constraintVertical_bias="0.542" />
+
+        <EditText
+            android:id="@+id/productPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginBottom="52dp"
+            android:autofillHints="Product price"
+            android:hint="@string/productPrice"
+            android:inputType="number"
+            android:textColorHint="#757575"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerDocument"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/codePurchaseEt"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginBottom="44dp"
+            android:autofillHints="Product code"
+            android:hint="@string/product_code"
+            android:inputType="number"
+            android:textColorHint="#757575"
+            app:layout_constraintBottom_toTopOf="@+id/productPrice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.046"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/customerVatIdField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="44dp"
+            android:text="@string/vat_id_field"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/codePurchaseEt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.054"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
