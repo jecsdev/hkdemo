@@ -1,16 +1,14 @@
 package com.hkfactorydemo.hkfactoryjohncampusano.ui.view.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hkfactorydemo.hkfactoryjohncampusano.R
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Details
-import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.viewHolder.DetailsViewHolder
 import javax.inject.Inject
 
-class DetailsAdapter @Inject constructor(private val purchaseList: List<Details>) :
+class DetailsAdapter @Inject constructor(private val detailList: MutableList<Details>) :
 RecyclerView.Adapter<DetailsViewHolder>(){
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): DetailsViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.details_row, viewGroup, false)
@@ -20,7 +18,7 @@ RecyclerView.Adapter<DetailsViewHolder>(){
     override fun onBindViewHolder(purchaseHolder: DetailsViewHolder, position: Int) {
         val subtotalText: String
         val subtotal: Int
-        val purchase = purchaseList[position]
+        val purchase = detailList[position]
         val productName = purchase.productName
         val productCount = purchase.productQuantity
         val productCode = purchase.productCode
@@ -33,7 +31,7 @@ RecyclerView.Adapter<DetailsViewHolder>(){
     }
 
     override fun getItemCount(): Int {
-        return purchaseList.size
+        return detailList.size
     }
 
 }

@@ -72,7 +72,11 @@ class DocumentFragment : Fragment(){
 
             detailsList.add(details)
 
-            initAdapter(detailsList)
+            purchaseViewModel.detailsModelList.value = detailsList
+            initAdapter(purchaseViewModel.detailsModelList.value!!)
+
+
+
         }
 
 
@@ -100,11 +104,13 @@ class DocumentFragment : Fragment(){
         return binding.root
     }
 
-    private fun initAdapter(details: List<Details>) {
+    private fun initAdapter(details: MutableList<Details>) {
         recyclerView = binding.recyclerDocument
         recyclerView.layoutManager = viewManager
-        recyclerView.adapter = DetailsAdapter(details)
-        recyclerView.adapter?.notifyDataSetChanged()
+            recyclerView.adapter = DetailsAdapter(details)
+            recyclerView.adapter?.notifyDataSetChanged()
+
+
 
     }
 
