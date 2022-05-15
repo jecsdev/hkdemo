@@ -24,7 +24,8 @@ class PurchaseViewModel @Inject constructor(
 
     fun getPurchase(){
         viewModelScope.launch {
-            getPurchaseCase.invoke()
+            val list = getPurchaseCase.invoke()
+            purchaseModelList.postValue(list)
         }
     }
 
