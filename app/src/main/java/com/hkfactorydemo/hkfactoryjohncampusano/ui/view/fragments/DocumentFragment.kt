@@ -65,11 +65,14 @@ class DocumentFragment : Fragment(){
             purchaseList.forEach {
                 purchase.totalSold += it.subtotal
             }
+            if(purchaseList.isNotEmpty()) {
+                purchaseViewModel.addDetails(purchase)
+            }
         }
 
-        if(purchaseList.isNotEmpty()) {
-            purchaseViewModel.getDetails()
+        purchaseViewModel.detailsModel.observe(viewLifecycleOwner){
         }
+
 
         initAdapter()
 
@@ -99,8 +102,7 @@ class DocumentFragment : Fragment(){
     private fun initAdapter() {
         recyclerView = binding.recyclerDocument
         recyclerView.layoutManager = viewManager
-        purchaseViewModel.getDetails()
-        purchaseViewModel.detailsModel.observe(viewLifecycleOwner){
+        purchaseViewModel.detailsModelList.observe(viewLifecycleOwner){
             recyclerView.adapter = DetailsAdapter(it)
             recyclerView.adapter?.notifyDataSetChanged()
         }
