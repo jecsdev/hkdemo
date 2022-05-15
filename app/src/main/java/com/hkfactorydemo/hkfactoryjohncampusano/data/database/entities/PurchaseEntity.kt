@@ -13,24 +13,8 @@ data class PurchaseEntity(
     @ColumnInfo(name = "seller") val seller: String,
     @ColumnInfo(name = "ncf") val ncf: String,
     @ColumnInfo(name = "vatId") val vatId: String,
-    @ColumnInfo(name = "productCode") val productCode: String,
-    @ColumnInfo(name = "product_name") val productName: String,
-    @ColumnInfo(name = "product_quantity") val productQuantity: Int,
-    @ColumnInfo(name = "product_price") val productPrice: Int,
     @ColumnInfo(name = "total_items") val totalItems: Int,
-    @ColumnInfo(name = "subtotal") val subtotal: Int,
     @ColumnInfo(name = "total_selled") val totalSold: Int
 )
 
-fun PurchaseModel.toDatabase() = PurchaseEntity(
-    customerName = customerName, seller = seller,
-    productName = productName,
-    ncf = ncf,
-    vatId = vatId,
-    productCode = productCode,
-    productQuantity = productQuantity,
-    productPrice = productQuantity,
-    subtotal = subtotal,
-    totalSold = totalSold
-, totalItems = totalItems
-)
+

@@ -12,7 +12,7 @@ import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.viewHolder.PurchaseViewH
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.viewModels.PurchaseViewModel
 import javax.inject.Inject
 
-class PurchaseAdapter @Inject constructor(private val viewModel: PurchaseViewModel, private val purchaseList: MutableList<Purchase>, private val context: Context):
+class PurchaseAdapter @Inject constructor( private val purchaseList: List<Purchase>):
     RecyclerView.Adapter<PurchaseViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): PurchaseViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.row, viewGroup, false)
@@ -23,14 +23,10 @@ class PurchaseAdapter @Inject constructor(private val viewModel: PurchaseViewMod
         val purchase = purchaseList[position]
         val purchaseCustomer = purchase.customerName
         val purchaseSeller = purchase.seller
-        val purchaseProduct = purchase.productName
-        val purchaseQuantity = purchase.productQuantity
         val purchaseTotal = purchase.totalSold
 
         viewHolder.customerName.text = purchaseCustomer
         viewHolder.seller.text = purchaseSeller
-        viewHolder.productName.text = purchaseProduct
-        viewHolder.quantity.text = purchaseQuantity.toString()
         viewHolder.total.text = purchaseTotal.toString()
 
     }

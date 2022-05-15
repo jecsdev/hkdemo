@@ -11,7 +11,7 @@ interface PurchaseDao {
     @Query("SELECT * FROM purchase_table ORDER BY id DESC")
     suspend fun getAllPurchases(): List<PurchaseEntity>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     suspend fun insertPurchase(purchase: PurchaseEntity)
 
    @Query("DELETE FROM purchase_table")

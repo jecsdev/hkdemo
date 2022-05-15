@@ -1,5 +1,6 @@
 package com.hkfactorydemo.hkfactoryjohncampusano.ui.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Button
 import androidx.fragment.app.commit
 import com.hkfactorydemo.hkfactoryjohncampusano.R
 import com.hkfactorydemo.hkfactoryjohncampusano.databinding.FragmentMainBinding
+import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.activities.PurchaseListActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,7 +39,8 @@ class MainFragment : Fragment() {
         }
 
         binding.btnGetSells.setOnClickListener {
-            //TODO
+            val intent = Intent(activity, PurchaseListActivity::class.java)
+            startActivity(intent)
         }
 
         return binding.root

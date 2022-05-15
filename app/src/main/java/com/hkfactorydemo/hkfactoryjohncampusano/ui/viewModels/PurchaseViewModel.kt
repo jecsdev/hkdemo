@@ -16,36 +16,22 @@ class PurchaseViewModel @Inject constructor(
     val getPurchaseCase: GetPurchaseCase):
     ViewModel() {
 
-    var purchaseModelList = MutableLiveData<MutableList<Purchase>>()
+    var purchaseModelList = MutableLiveData<List<Purchase>>()
     private val purchaseModel = MutableLiveData<Purchase>()
     val detailsModelList = MutableLiveData<MutableList<Details>>()
     var total = 0
     var count = 1
+
     fun getPurchase(){
         viewModelScope.launch {
-           val result = getPurchaseCase()
-            if(result.isNotEmpty()){
-                purchaseModel.value
-            }
+            getPurchaseCase.invoke()
         }
     }
 
-    fun totalSelled(amount: Int){
-        total +=amount
-    }
 
     fun createPurchase(purchase: PurchaseEntity){
         viewModelScope.launch {
-            val result = getPurchaseCase()
-            if(result.isNotEmpty()){
-                getPurchaseCase.insertPurchase(purchase)
-            }
-        }
-    }
-
-    fun addPurchase(purchase: Purchase){
-        viewModelScope.launch {
-            purchase.productName
+              getPurchaseCase.insertPurchase(purchase)
         }
     }
 

@@ -8,7 +8,7 @@ import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Details
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.viewHolder.DetailsViewHolder
 import javax.inject.Inject
 
-class DetailsAdapter @Inject constructor(private val detailList: MutableList<Details>) :
+class DetailsAdapter @Inject constructor(private val detailList: List<Details>) :
 RecyclerView.Adapter<DetailsViewHolder>(){
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): DetailsViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.details_row, viewGroup, false)
@@ -26,7 +26,7 @@ RecyclerView.Adapter<DetailsViewHolder>(){
         purchaseHolder.itemName.text = productName
         purchaseHolder.itemCount.text = subtotalText
         purchaseHolder.itemCode.text = productCode
-        subtotal = productCount * purchase.productPrice!!
+        subtotal = productCount * purchase.productPrice
         purchaseHolder.itemSubtotal.text = subtotal.toString()
     }
 
