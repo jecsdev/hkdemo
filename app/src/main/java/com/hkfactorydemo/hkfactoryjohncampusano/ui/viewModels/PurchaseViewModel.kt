@@ -19,7 +19,7 @@ class PurchaseViewModel @Inject constructor(
     val purchaseModelList = MutableLiveData<MutableList<Purchase>>()
     val purchaseModel = MutableLiveData<Purchase>()
     val detailsModelList = MutableLiveData<MutableList<Details>>()
-    val detailsModel = MutableLiveData<Details>()
+    val detailModels = MutableLiveData<Details>()
     var count = 1
     fun getPurchase(){
         viewModelScope.launch {
@@ -30,17 +30,15 @@ class PurchaseViewModel @Inject constructor(
         }
     }
 
-    fun addDetails(purchase: Purchase){
+    fun insertDetails(purchase: Purchase){
         viewModelScope.launch {
-            detailsModel.value?.productName = purchase.productName
-            detailsModel.value?.productPrice = purchase.productPrice
-            detailsModel.value?.productCode = purchase.productCode
-            detailsModel.value?.productQuantity = purchase.productQuantity
-            detailsModel.value?.subtotal = purchase.subtotal
-            detailsModel.postValue(detailsModel.value)
+            detailModels.value?.productName = purchase.productName
+            detailModels.value?.productCode = purchase.productCode
+            detailModels.value?.productPrice = purchase.productPrice
+            detailModels.value?.productQuantity = purchase.productQuantity
+            detailModels.value?.subtotal = purchase.subtotal
         }
     }
-
 
     fun createPurchase(purchase: PurchaseEntity){
         viewModelScope.launch {
@@ -48,6 +46,12 @@ class PurchaseViewModel @Inject constructor(
             if(result.isNotEmpty()){
                 getPurchaseCase.insertPurchase(purchase)
             }
+        }
+    }
+
+    fun addPurchase(purchase: Purchase){
+        viewModelScope.launch {
+            purchase.productName
         }
     }
 

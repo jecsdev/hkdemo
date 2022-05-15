@@ -65,13 +65,17 @@ class DocumentFragment : Fragment(){
             purchaseList.forEach {
                 purchase.totalSold += it.subtotal
             }
-            if(purchaseList.isNotEmpty()) {
-                purchaseViewModel.addDetails(purchase)
+
+            purchaseViewModel.detailModels.observe(viewLifecycleOwner){
+                it.subtotal = purchase.subtotal
+                it.productPrice = purchase.productPrice
+                it.productName = purchase.productName
+                it.productCode = purchase.productCode
+                it.productQuantity = purchase.productQuantity
             }
+
         }
 
-        purchaseViewModel.detailsModel.observe(viewLifecycleOwner){
-        }
 
 
         initAdapter()
