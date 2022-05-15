@@ -65,11 +65,18 @@ class DocumentFragment : Fragment(){
             purchaseList.forEach {
                 purchase.totalSold += it.subtotal
             }
+
+            purchaseViewModel.detailModels.observe(viewLifecycleOwner){
+                it.subtotal = purchase.subtotal
+                it.productPrice = purchase.productPrice
+                it.productName = purchase.productName
+                it.productCode = purchase.productCode
+                it.productQuantity = purchase.productQuantity
+            }
+
         }
 
-        if(purchaseList.isNotEmpty()) {
-            purchaseViewModel.getDetails()
-        }
+
 
         initAdapter()
 
@@ -99,8 +106,7 @@ class DocumentFragment : Fragment(){
     private fun initAdapter() {
         recyclerView = binding.recyclerDocument
         recyclerView.layoutManager = viewManager
-        purchaseViewModel.getDetails()
-        purchaseViewModel.detailsModel.observe(viewLifecycleOwner){
+        purchaseViewModel.detailsModelList.observe(viewLifecycleOwner){
             recyclerView.adapter = DetailsAdapter(it)
             recyclerView.adapter?.notifyDataSetChanged()
         }

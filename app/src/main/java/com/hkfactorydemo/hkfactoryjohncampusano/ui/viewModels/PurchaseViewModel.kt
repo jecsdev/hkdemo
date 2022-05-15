@@ -18,7 +18,8 @@ class PurchaseViewModel @Inject constructor(
 
     val purchaseModelList = MutableLiveData<MutableList<Purchase>>()
     val purchaseModel = MutableLiveData<Purchase>()
-    val detailsModel = MutableLiveData<MutableList<Details>>()
+    val detailsModelList = MutableLiveData<MutableList<Details>>()
+    val detailModels = MutableLiveData<Details>()
     var count = 1
     fun getPurchase(){
         viewModelScope.launch {
@@ -29,15 +30,13 @@ class PurchaseViewModel @Inject constructor(
         }
     }
 
-    fun getDetails(){
+    fun insertDetails(purchase: Purchase){
         viewModelScope.launch {
-            detailsModel.value
-        }
-    }
-
-    fun insertDetails(){
-        viewModelScope.launch {
-            detailsModel
+            detailModels.value?.productName = purchase.productName
+            detailModels.value?.productCode = purchase.productCode
+            detailModels.value?.productPrice = purchase.productPrice
+            detailModels.value?.productQuantity = purchase.productQuantity
+            detailModels.value?.subtotal = purchase.subtotal
         }
     }
 
