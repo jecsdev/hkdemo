@@ -36,7 +36,7 @@ class PurchaseViewModel @Inject constructor(
         }
     }
 
-    fun removePurchase(purchase: Int){
+    fun removePurchase(purchase: Purchase){
         viewModelScope.launch {
             getPurchaseCase.deleteAllPurchases(purchase)
             getPurchase()

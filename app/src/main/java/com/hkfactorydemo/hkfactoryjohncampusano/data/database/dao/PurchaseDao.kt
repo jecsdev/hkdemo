@@ -1,10 +1,8 @@
 package com.hkfactorydemo.hkfactoryjohncampusano.data.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.hkfactorydemo.hkfactoryjohncampusano.data.database.entities.PurchaseEntity
+import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
 
 @Dao
 interface PurchaseDao {
@@ -14,6 +12,6 @@ interface PurchaseDao {
     @Insert
     suspend fun insertPurchase(purchase: PurchaseEntity)
 
-   @Query("DELETE FROM purchase_table where :purchaseId = id")
-    suspend fun deleteAllPurchases(purchaseId: Int)
+   @Delete
+    suspend fun deleteAllPurchases(purchase: Purchase)
 }
