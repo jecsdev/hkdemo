@@ -19,6 +19,7 @@ class PurchaseListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPurchaseListBinding
     private lateinit var mainRecyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.title = "Lista de compras"
         binding = ActivityPurchaseListBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)

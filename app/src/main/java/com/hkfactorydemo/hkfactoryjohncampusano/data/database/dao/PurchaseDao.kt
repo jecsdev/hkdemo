@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.hkfactorydemo.hkfactoryjohncampusano.data.database.entities.PurchaseEntity
+import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
 
 @Dao
 interface PurchaseDao {
@@ -15,5 +16,5 @@ interface PurchaseDao {
     suspend fun insertPurchase(purchase: PurchaseEntity)
 
    @Query("DELETE FROM purchase_table where :purchaseId = id")
-    suspend fun deleteAllPurchases(purchaseId: Int)
+    suspend fun deleteAllPurchases(purchaseId: PurchaseEntity)
 }
