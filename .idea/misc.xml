@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/john0/AndroidStudioProjects/HkFactoryJohnCampusano/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1105" />
+        <entry key="..\:/Users/john0/AndroidStudioProjects/HkFactoryJohnCampusano/app/src/main/res/drawable/ic_baseline_add_shopping_cart_24.xml" value="0.1105" />
+        <entry key="..\:/Users/john0/AndroidStudioProjects/HkFactoryJohnCampusano/app/src/main/res/drawable/ic_baseline_restore_from_trash_24.xml" value="0.1105" />
+        <entry key="..\:/Users/john0/AndroidStudioProjects/HkFactoryJohnCampusano/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1105" />
         <entry key="..\:/Users/john0/AndroidStudioProjects/HkFactoryJohnCampusano/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/john0/AndroidStudioProjects/HkFactoryJohnCampusano/app/src/main/res/layout/activity_purchase_list.xml" value="0.17604166666666668" />
         <entry key="..\:/Users/john0/AndroidStudioProjects/HkFactoryJohnCampusano/app/src/main/res/layout/activity_report.xml" value="0.3546875" />
