@@ -3,12 +3,14 @@ package com.hkfactorydemo.hkfactoryjohncampusano.ui.view.activities
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.print.PrintAttributes
 import android.print.PrintManager
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.hkfactorydemo.hkfactoryjohncampusano.R
+import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.DetailList
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Details
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.adapters.PdfDocumentAdapter
@@ -19,8 +21,10 @@ import com.itextpdf.text.pdf.PdfWriter
 import com.itextpdf.text.pdf.draw.LineSeparator
 import com.itextpdf.text.pdf.draw.VerticalPositionMark
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.serialization.Serializable
 import java.io.File
 import java.io.FileOutputStream
+
 import kotlin.jvm.Throws
 
 @AndroidEntryPoint
@@ -32,9 +36,7 @@ class ReportActivity : AppCompatActivity() {
         setContentView(R.layout.activity_report)
 
 
-            createPdfFile(getAppPath(this@ReportActivity) + fileName, viewModel.detailsModelList.value!!)
-
-
+            createPdfFile(getAppPath(this@ReportActivity) + fileName)
 
 
     }
@@ -58,7 +60,7 @@ class ReportActivity : AppCompatActivity() {
         }
 
 
-    private fun createPdfFile(path: String, details: List<Details> ) {
+    private fun createPdfFile(path: String ) {
       if(File(path).exists()){
           File(path).delete()
       }
@@ -72,7 +74,7 @@ class ReportActivity : AppCompatActivity() {
             val ncf = bundle?.getString("ncf")
             val totalSold = bundle?.getString("totalSold")
             val totalItems = bundle?.getString("totalItems")
-            val details = bundle?.getParcelableArray("detailList")
+            val details: ArrayList<DetailList>? = intent.getParcelableArrayListExtra("detailList")
 
             PdfWriter.getInstance(document, FileOutputStream(path))
 
@@ -111,19 +113,16 @@ class ReportActivity : AppCompatActivity() {
             //item
             var acummulative = 0
 
-          /*  details?.forEach {
-
-            }
-            details.forEach {
+            details?.forEach {
                acummulative =  it.productQuantity * it.productPrice
                 addNewItem(document, "Código: ${it.productCode}", Element.ALIGN_LEFT, titleStyle)
                 addNewItem(document, "${it.productQuantity} x ${it.productPrice}", Element.ALIGN_CENTER, titleStyle)
-                addNewItemLeftRight(document, it.productName, "$acummulative", titleStyle, valueStyle)
-            }*/
+                addNewItemLeftRight(document, "${it.productName}", "$acummulative", titleStyle, valueStyle)
+            }
             addLineSeparator(document)
             addLineSeparator(document)
 
-            addNewItemLeftRight(document, "Total", "$$totalSold}", titleStyle, valueStyle)
+            addNewItemLeftRight(document, "Total", "$totalSold}", titleStyle, valueStyle)
 
             document.close()
 
@@ -135,8 +134,8 @@ class ReportActivity : AppCompatActivity() {
     }
     @Throws(DocumentException::class)
     private fun addNewItemLeftRight(document: Document, textLeft: String, textRight: String, leftStyle: Font, rightStyle: Font) {
-        var chunkTextLeft = Chunk(textLeft, leftStyle)
-        var chunkTextRight= Chunk(textRight, rightStyle)
+        val chunkTextLeft = Chunk(textLeft, leftStyle)
+        val chunkTextRight= Chunk(textRight, rightStyle)
         val p = Paragraph(chunkTextLeft)
         p.add(Chunk(VerticalPositionMark()))
             p.add(chunkTextRight)

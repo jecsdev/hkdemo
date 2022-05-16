@@ -2,7 +2,6 @@ package com.hkfactorydemo.hkfactoryjohncampusano.ui.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,12 +15,10 @@ import com.hkfactorydemo.hkfactoryjohncampusano.data.database.entities.PurchaseE
 import com.hkfactorydemo.hkfactoryjohncampusano.databinding.FragmentDocumentBinding
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.DetailList
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Details
-import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.activities.ReportActivity
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.adapters.DetailsAdapter
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.viewModels.PurchaseViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.NumberFormatException
 
 @AndroidEntryPoint
 class DocumentFragment : Fragment(){
@@ -158,7 +155,8 @@ class DocumentFragment : Fragment(){
 
             detailsList.add(details)
             detailListSerializable.add(
-                DetailList(productPrice = binding.productPrice.text.toString().toInt(),
+                DetailList(
+                    productPrice = binding.productPrice.text.toString().toInt(),
                     productName = binding.productNameEt.text.toString(), productQuantity = purchaseViewModel.count,
                     productCode = binding.codePurchaseEt.text.toString(), subtotal = binding.subtotal.text.toString().toInt())
             )
