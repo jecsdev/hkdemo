@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -145,6 +146,7 @@ class DocumentFragment : Fragment(){
             binding.productNameEt.error = "Por favor, introduzca el nombre del producto."
             binding.productNameEt.setTextColor(R.color.red)
         }else{
+            if(purchaseViewModel.count <100){
             subtotal =  binding.productPrice.text.toString().toInt() * purchaseViewModel.count
             purchaseViewModel.total+=subtotal
             binding.subtotal.text = purchaseViewModel.total.toString()
@@ -165,6 +167,10 @@ class DocumentFragment : Fragment(){
             initAdapter(purchaseViewModel.detailsModelList.value!!)
 
             clearTextFields()
+            }else{
+                Toast.makeText(context, "Usted ha sobre pasado el limite de 100 productos por carrito.",
+                    Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -172,6 +178,7 @@ class DocumentFragment : Fragment(){
         binding.productPrice.text.clear()
         binding.productNameEt.text.clear()
         binding.codePurchaseEt.text.clear()
+        purchaseViewModel.count = 1
     }
 
     private fun initAdapter(details: List<Details>) {

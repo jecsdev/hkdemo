@@ -1,27 +1,22 @@
 package com.hkfactorydemo.hkfactoryjohncampusano.ui.view.activities
-
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcelable
 import android.print.PrintAttributes
 import android.print.PrintManager
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.viewModels
 import com.hkfactorydemo.hkfactoryjohncampusano.R
+import com.hkfactorydemo.hkfactoryjohncampusano.databinding.ActivityReportBinding
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.DetailList
-import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Details
-import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.adapters.PdfDocumentAdapter
-import com.hkfactorydemo.hkfactoryjohncampusano.ui.viewModels.PurchaseViewModel
 import com.itextpdf.text.*
 import com.itextpdf.text.pdf.BaseFont
 import com.itextpdf.text.pdf.PdfWriter
 import com.itextpdf.text.pdf.draw.LineSeparator
 import com.itextpdf.text.pdf.draw.VerticalPositionMark
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.serialization.Serializable
 import java.io.File
 import java.io.FileOutputStream
 
@@ -29,15 +24,19 @@ import kotlin.jvm.Throws
 
 @AndroidEntryPoint
 class ReportActivity : AppCompatActivity() {
-    private val viewModel: PurchaseViewModel by viewModels()
+    private lateinit var binding : ActivityReportBinding
     private val fileName = "report.pdf"
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivityReportBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_report)
+        setContentView(binding.root)
 
-
+            supportActionBar?.title = "Finalización de compra"
             createPdfFile(getAppPath(this@ReportActivity) + fileName)
 
+            binding.returnMainBtn.setOnClickListener {
+                finish()
+            }
 
     }
 
@@ -73,7 +72,6 @@ class ReportActivity : AppCompatActivity() {
             val vatID = bundle?.getString("vatId")
             val ncf = bundle?.getString("ncf")
             val totalSold = bundle?.getString("totalSold")
-            val totalItems = bundle?.getString("totalItems")
             val details: ArrayList<DetailList>? = intent.getParcelableArrayListExtra("detailList")
 
             PdfWriter.getInstance(document, FileOutputStream(path))
@@ -149,6 +147,7 @@ class ReportActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e("message", e.message ?: "")
         }
+
     }
 
     private fun addLineSeparator(document: Document) {

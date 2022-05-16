@@ -35,7 +35,6 @@ class MainFragment : Fragment() {
                     )
 
                     replace(R.id.container, customerFragment)
-                    addToBackStack(null)
                 }
         }
 
