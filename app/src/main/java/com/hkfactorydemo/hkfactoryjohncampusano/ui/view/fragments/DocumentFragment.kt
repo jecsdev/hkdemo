@@ -69,7 +69,7 @@ class DocumentFragment : Fragment(){
                 intent.putExtra("customerName", binding.customerName.text.toString())
                 intent.putExtra("vatId", binding.vatId.text.toString())
                 intent.putExtra("totalItems", purchaseViewModel.detailsModelList.value!!.size.toString())
-                intent.putExtra("totalSold", purchaseViewModel.total)
+                intent.putExtra("totalSold", purchaseViewModel.total.toString())
                 intent.putExtra("detailList", detailListSerializable)
 
 

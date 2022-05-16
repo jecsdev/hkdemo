@@ -89,20 +89,18 @@ class ReportActivity : AppCompatActivity() {
 
 
             val fontName = BaseFont.createFont("assets/fonts/brandom_medium.otf", "UTF-8", BaseFont.EMBEDDED)
-            val titleStyle = Font(fontName, 36.0f, Font.NORMAL, BaseColor.BLACK)
+            val titleStyle = Font(fontName, 32.0f, Font.NORMAL, BaseColor.BLACK)
             val valueStyle = Font(fontName, 28.0f, Font.NORMAL, BaseColor.BLACK)
             addNewItem(document, seller.toString(), Element.ALIGN_CENTER, titleStyle)
 
-            val rncStyle = Font(fontName, 34.0f, Font.NORMAL, BaseColor.BLACK)
+            val rncStyle = Font(fontName, 30.0f, Font.NORMAL, BaseColor.BLACK)
             val headingStyle = Font(fontName, headingFontSize, Font.NORMAL, colorAccent)
             addNewItem(document, ncf.toString(), Element.ALIGN_CENTER, rncStyle)
 
 
-            addNewItem(document, "Cliente: ", Element.ALIGN_LEFT, headingStyle)
-            addNewItem(document, customerName.toString(), Element.ALIGN_LEFT, headingStyle)
+            addNewItem(document, "Cliente: ${customerName.toString()}", Element.ALIGN_LEFT, headingStyle)
 
-            addNewItem(document, "Cedula: ", Element.ALIGN_LEFT, headingStyle)
-            addNewItem(document, vatID.toString(), Element.ALIGN_LEFT, headingStyle)
+            addNewItem(document, "Cedula: ${vatID.toString()}", Element.ALIGN_LEFT, headingStyle)
 
 
             //product detail
@@ -111,18 +109,18 @@ class ReportActivity : AppCompatActivity() {
             addLineSeparator(document)
 
             //item
-            var acummulative = 0
+            var acummulative: Int
 
             details?.forEach {
-               acummulative =  it.productQuantity * it.productPrice
-                addNewItem(document, "Código: ${it.productCode}", Element.ALIGN_LEFT, titleStyle)
-                addNewItem(document, "${it.productQuantity} x ${it.productPrice}", Element.ALIGN_CENTER, titleStyle)
-                addNewItemLeftRight(document, "${it.productName}", "$acummulative", titleStyle, valueStyle)
+                acummulative =  it.productQuantity * it.productPrice
+                addNewItem(document, "Codigo: ${it.productCode}", Element.ALIGN_LEFT, valueStyle)
+                addNewItem(document, "${it.productQuantity} x ${it.productPrice}", Element.ALIGN_LEFT, valueStyle)
+                addNewItemLeftRight(document, "${it.productName}", "$acummulative", valueStyle, valueStyle)
             }
             addLineSeparator(document)
             addLineSeparator(document)
 
-            addNewItemLeftRight(document, "Total", "$totalSold}", titleStyle, valueStyle)
+            addNewItemLeftRight(document, "Total", "$totalSold", valueStyle, valueStyle)
 
             document.close()
 
@@ -139,6 +137,7 @@ class ReportActivity : AppCompatActivity() {
         val p = Paragraph(chunkTextLeft)
         p.add(Chunk(VerticalPositionMark()))
             p.add(chunkTextRight)
+        document.add(p)
         addLineSpace(document)
     }
 
