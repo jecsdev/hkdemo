@@ -42,7 +42,7 @@ class PurchaseAdapter @Inject constructor( private val purchaseList: MutableList
             builder.setMessage("Esta seguro de querer borrar este elemento?")
             builder.setPositiveButton("Si") { _, _ ->
                 purchaseViewModel.purchaseModelList.value?.removeAt(position)
-                purchaseViewModel.removePurchase(position)
+                purchaseViewModel.removePurchase(purchase)
                 notifyItemRemoved(position)
 
 
