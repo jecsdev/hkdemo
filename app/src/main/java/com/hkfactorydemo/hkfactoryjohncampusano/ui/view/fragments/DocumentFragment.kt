@@ -1,5 +1,6 @@
 package com.hkfactorydemo.hkfactoryjohncampusano.ui.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.hkfactorydemo.hkfactoryjohncampusano.data.database.entities.PurchaseE
 import com.hkfactorydemo.hkfactoryjohncampusano.databinding.FragmentDocumentBinding
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Details
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
+import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.activities.ReportActivity
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.adapters.DetailsAdapter
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.viewModels.PurchaseViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,7 +63,18 @@ class DocumentFragment : Fragment(){
                 )
                 purchaseViewModel.createPurchase(purchase)
 
+                val intent = Intent(activity, ReportActivity::class.java)
 
+                intent.putExtra("seller", binding.sellerName.text.toString())
+                intent.putExtra("ncf", binding.ncf.text.toString())
+                intent.putExtra("customerName", binding.customerName.text.toString())
+                intent.putExtra("vatId", binding.vatId.text.toString())
+                intent.putExtra("totalItems", purchaseViewModel.detailsModelList.value!!.size.toString())
+                intent.putExtra("totalSold", purchaseViewModel.total)
+
+            
+
+                startActivity(intent)
 
                 closePurchase()
 

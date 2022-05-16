@@ -40,7 +40,7 @@ class MainFragment : Fragment() {
         }
 
         binding.btnGetSells.setOnClickListener {
-            val intent = Intent(activity, ReportActivity::class.java)
+            val intent = Intent(activity, PurchaseListActivity::class.java)
             startActivity(intent)
         }
 

@@ -9,6 +9,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.hkfactorydemo.hkfactoryjohncampusano.R
+import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Details
+import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.adapters.PdfDocumentAdapter
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.viewModels.PurchaseViewModel
 import com.itextpdf.text.*
@@ -29,7 +31,10 @@ class ReportActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report)
 
-        createPdfFile(getAppPath(this@ReportActivity) + fileName)
+
+            createPdfFile(getAppPath(this@ReportActivity) + fileName, viewModel.detailsModelList.value!!)
+
+
 
 
     }
@@ -53,12 +58,20 @@ class ReportActivity : AppCompatActivity() {
         }
 
 
-    private fun createPdfFile(path: String) {
+    private fun createPdfFile(path: String, details: List<Details> ) {
       if(File(path).exists()){
           File(path).delete()
       }
         try{
+
             val document = Document()
+            val bundle = intent.extras
+            val seller = bundle?.getString("seller")
+            val customerName = bundle?.getString("customerName")
+            val vatID = bundle?.getString("vatId")
+            val ncf = bundle?.getString("ncf")
+            val totalSold = bundle?.getString("totalSold")
+            val totalItems = bundle?.getString("totalItems")
 
             PdfWriter.getInstance(document, FileOutputStream(path))
 
@@ -71,42 +84,39 @@ class ReportActivity : AppCompatActivity() {
             val colorAccent = BaseColor(0, 153, 204, 255)
             val headingFontSize = 20.0f
 
+
             val fontName = BaseFont.createFont("assets/fonts/brandom_medium.otf", "UTF-8", BaseFont.EMBEDDED)
             val titleStyle = Font(fontName, 36.0f, Font.NORMAL, BaseColor.BLACK)
-            addNewItem(document, "Order details", Element.ALIGN_CENTER, titleStyle)
+            val valueStyle = Font(fontName, 28.0f, Font.NORMAL, BaseColor.BLACK)
+            addNewItem(document, seller.toString(), Element.ALIGN_CENTER, titleStyle)
 
+            val rncStyle = Font(fontName, 34.0f, Font.NORMAL, BaseColor.BLACK)
             val headingStyle = Font(fontName, headingFontSize, Font.NORMAL, colorAccent)
-            addNewItem(document, "Order No.:", Element.ALIGN_LEFT, headingStyle)
+            addNewItem(document, ncf.toString(), Element.ALIGN_CENTER, rncStyle)
 
-            val valueStyle = Font(fontName, headingFontSize, Font.NORMAL, colorAccent)
-            addNewItem(document, "12121212", Element.ALIGN_LEFT, valueStyle)
 
-            addLineSeparator(document)
+            addNewItem(document, "Cliente: ", Element.ALIGN_LEFT, headingStyle)
+            addNewItem(document, seller.toString(), Element.ALIGN_LEFT, headingStyle)
 
-            addNewItem(document, "Order details", Element.ALIGN_CENTER, titleStyle)
-            addNewItem(document, "20/19/2020", Element.ALIGN_CENTER, titleStyle)
 
-            addLineSeparator(document)
-
-            addNewItem(document, "Acount Name", Element.ALIGN_CENTER, titleStyle)
-            addNewItem(document, "John Campusano", Element.ALIGN_CENTER, titleStyle)
-
-            addLineSeparator(document)
 
             //product detail
             addLineSpace(document)
-            addNewItem(document, "Product details", Element.ALIGN_CENTER, titleStyle)
+            addNewItem(document, "Detalle de ventas", Element.ALIGN_CENTER, titleStyle)
             addLineSeparator(document)
 
             //item
-
-            addNewItemLeftRight(document, "Pizza", "0.00", titleStyle, valueStyle)
-            addNewItemLeftRight(document, "12 * 1000", "120000", titleStyle, valueStyle)
-
+            var acummulative = 0
+            details.forEach {
+               acummulative =  it.productQuantity * it.productPrice
+                addNewItem(document, "Código: ${it.productCode}", Element.ALIGN_LEFT, titleStyle)
+                addNewItem(document, "${it.productQuantity} x ${it.productPrice}", Element.ALIGN_CENTER, titleStyle)
+                addNewItemLeftRight(document, it.productName, "$acummulative", titleStyle, valueStyle)
+            }
             addLineSeparator(document)
             addLineSeparator(document)
 
-            addNewItemLeftRight(document, "Total", "120000", titleStyle, valueStyle)
+            addNewItemLeftRight(document, "Total", "$$totalSold}", titleStyle, valueStyle)
 
             document.close()
 
