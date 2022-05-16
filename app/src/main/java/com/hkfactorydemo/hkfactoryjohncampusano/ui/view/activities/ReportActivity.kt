@@ -72,6 +72,7 @@ class ReportActivity : AppCompatActivity() {
             val ncf = bundle?.getString("ncf")
             val totalSold = bundle?.getString("totalSold")
             val totalItems = bundle?.getString("totalItems")
+            val details = bundle?.getParcelableArray("detailList")
 
             PdfWriter.getInstance(document, FileOutputStream(path))
 
@@ -96,8 +97,10 @@ class ReportActivity : AppCompatActivity() {
 
 
             addNewItem(document, "Cliente: ", Element.ALIGN_LEFT, headingStyle)
-            addNewItem(document, seller.toString(), Element.ALIGN_LEFT, headingStyle)
+            addNewItem(document, customerName.toString(), Element.ALIGN_LEFT, headingStyle)
 
+            addNewItem(document, "Cedula: ", Element.ALIGN_LEFT, headingStyle)
+            addNewItem(document, vatID.toString(), Element.ALIGN_LEFT, headingStyle)
 
 
             //product detail
@@ -107,12 +110,16 @@ class ReportActivity : AppCompatActivity() {
 
             //item
             var acummulative = 0
+
+          /*  details?.forEach {
+
+            }
             details.forEach {
                acummulative =  it.productQuantity * it.productPrice
                 addNewItem(document, "Código: ${it.productCode}", Element.ALIGN_LEFT, titleStyle)
                 addNewItem(document, "${it.productQuantity} x ${it.productPrice}", Element.ALIGN_CENTER, titleStyle)
                 addNewItemLeftRight(document, it.productName, "$acummulative", titleStyle, valueStyle)
-            }
+            }*/
             addLineSeparator(document)
             addLineSeparator(document)
 

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hkfactorydemo.hkfactoryjohncampusano.R
 import com.hkfactorydemo.hkfactoryjohncampusano.data.database.entities.PurchaseEntity
 import com.hkfactorydemo.hkfactoryjohncampusano.databinding.FragmentDocumentBinding
+import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.DetailList
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Details
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.activities.ReportActivity
@@ -28,6 +29,7 @@ class DocumentFragment : Fragment(){
     private lateinit var binding: FragmentDocumentBinding
     private  var viewManager = LinearLayoutManager(activity)
     private var subtotal = 0
+    private var detailListSerializable = arrayListOf<DetailList>()
 
     private var detailsList = mutableListOf<Details>()
     private val purchaseViewModel: PurchaseViewModel by viewModels()
@@ -71,8 +73,8 @@ class DocumentFragment : Fragment(){
                 intent.putExtra("vatId", binding.vatId.text.toString())
                 intent.putExtra("totalItems", purchaseViewModel.detailsModelList.value!!.size.toString())
                 intent.putExtra("totalSold", purchaseViewModel.total)
+                intent.putExtra("detailList", detailListSerializable)
 
-            
 
                 startActivity(intent)
 
@@ -155,6 +157,11 @@ class DocumentFragment : Fragment(){
                 productCode = binding.codePurchaseEt.text.toString(), subtotal = binding.subtotal.text.toString().toInt())
 
             detailsList.add(details)
+            detailListSerializable.add(
+                DetailList(productPrice = binding.productPrice.text.toString().toInt(),
+                    productName = binding.productNameEt.text.toString(), productQuantity = purchaseViewModel.count,
+                    productCode = binding.codePurchaseEt.text.toString(), subtotal = binding.subtotal.text.toString().toInt())
+            )
 
             purchaseViewModel.detailsModelList.value = detailsList
             initAdapter(purchaseViewModel.detailsModelList.value!!)
