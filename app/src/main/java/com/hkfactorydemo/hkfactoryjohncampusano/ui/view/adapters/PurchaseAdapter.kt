@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.hkfactorydemo.hkfactoryjohncampusano.R
+import com.hkfactorydemo.hkfactoryjohncampusano.data.database.entities.PurchaseEntity
 import com.hkfactorydemo.hkfactoryjohncampusano.domain.model.Purchase
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.view.viewHolder.PurchaseViewHolder
 import com.hkfactorydemo.hkfactoryjohncampusano.ui.viewModels.PurchaseViewModel
@@ -41,10 +42,10 @@ class PurchaseAdapter @Inject constructor( private val purchaseList: MutableList
             builder.setTitle("Borrar")
             builder.setMessage("Esta seguro de querer borrar este elemento?")
             builder.setPositiveButton("Si") { _, _ ->
-                purchaseViewModel.purchaseModelList.value?.removeAt(position)
-                purchaseViewModel.removePurchase(purchase)
-                notifyItemRemoved(position)
 
+                purchaseList.removeAt(position)
+               // purchaseViewModel.removePurchase(purchaseDelete)
+                notifyItemRemoved(position)
 
             }
             builder.setNegativeButton("Cancelar", null).show()

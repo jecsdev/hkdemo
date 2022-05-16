@@ -7,7 +7,7 @@
     android:id="@+id/mainContainer"
     tools:context=".ui.view.activities.MainActivity">
 
-
+    <include layout="@layout/appbar" android:id="@+id/mainActionBar"/>
 
 
 

@@ -1,5 +1,6 @@
 package com.hkfactorydemo.hkfactoryjohncampusano.ui.view.activities
 
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -27,8 +28,21 @@ class PurchaseListActivity : AppCompatActivity() {
         viewModel.getPurchase()
 
         mainRecyclerView = binding.recyclerMain
-
+        binding.layoutDelete.actionBarTitle.text = "Lista de compras"
         initializeAdapter()
+
+        binding.layoutDelete.delete.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Borrar")
+            builder.setMessage("¿Esta seguro de querer borrar los elementos de la lista?" +
+                    "Una vez hecho esto, no hay vuelta atrás.")
+            builder.setPositiveButton("Si") { _, _ ->
+                viewModel.removePurchase()
+            }
+            builder.setNegativeButton("Cancelar", null).show()
+
+
+        }
 
 
     }

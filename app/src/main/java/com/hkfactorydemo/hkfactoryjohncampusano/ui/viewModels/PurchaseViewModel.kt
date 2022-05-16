@@ -17,10 +17,12 @@ class PurchaseViewModel @Inject constructor(
     ViewModel() {
 
     var purchaseModelList = MutableLiveData<MutableList<Purchase>>()
-    private val purchaseModel = MutableLiveData<Purchase>()
+    val purchaseModel = MutableLiveData<Purchase>()
     val detailsModelList = MutableLiveData<MutableList<Details>>()
     var total = 0
     var count = 1
+
+
 
     fun getPurchase(){
         viewModelScope.launch {
@@ -36,10 +38,9 @@ class PurchaseViewModel @Inject constructor(
         }
     }
 
-    fun removePurchase(purchase: Purchase){
+    fun removePurchase( ){
         viewModelScope.launch {
-            getPurchaseCase.deleteAllPurchases(purchase)
-            getPurchase()
+            getPurchaseCase.deleteAllPurchases()
         }
     }
 

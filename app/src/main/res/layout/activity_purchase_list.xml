@@ -4,21 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.activities.PurchaseListActivity">
+    tools:context=".ui.view.activities.PurchaseListActivity"
+    >
 
-
+    <include layout="@layout/toolbar" android:id="@+id/layoutDelete"/>
 
 
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             >
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerMain"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="70dp"/>
         </FrameLayout>
 
     
