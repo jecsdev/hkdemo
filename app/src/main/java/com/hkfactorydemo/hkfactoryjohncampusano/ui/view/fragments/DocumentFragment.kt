@@ -61,6 +61,8 @@ class DocumentFragment : Fragment(){
                 )
                 purchaseViewModel.createPurchase(purchase)
 
+
+
                 closePurchase()
 
 
