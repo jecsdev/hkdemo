@@ -41,6 +41,7 @@ class PurchaseViewModel @Inject constructor(
     fun removePurchase( ){
         viewModelScope.launch {
             getPurchaseCase.deleteAllPurchases()
+            getPurchase()
         }
     }
 
